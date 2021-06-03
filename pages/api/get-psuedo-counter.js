@@ -3,7 +3,7 @@ const TIMEOUT_THRESHOLD = 5000
 
 export default async function (_, res) {
   res.setHeader('Cache-Control', 's-maxage=2, stale-while-revalidate')
-  setTimeout(sendDefaultResponse(res), TIMEOUT_THRESHOLD)
+  setTimeout(() => sendDefaultResponse(res), TIMEOUT_THRESHOLD)
   try {
     const previousResponse = await (await fetch(URL)).json()
     console.log('previousResponse', previousResponse)
