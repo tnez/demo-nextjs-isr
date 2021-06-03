@@ -8,34 +8,29 @@ const env = Object.freeze({
 const URL = `https://api.notion.com/v1/databases/${env.DATABASE_ID}/query`
 
 export async function fetchAnimals({ errorRate = 0 } = {}) {
-  try {
-    // simulate an error if desired
-    const errorThreshold = 1.0 - errorRate
-    const rando = Math.random()
-    if (rando > errorThreshold) {
-      throw new Error(
-        `Request failed: triggered simulated error (${rando} > ${errorThreshold})`,
-      )
-    }
+  // simulate an error if desired
+  const errorThreshold = 1.0 - errorRate
+  const rando = Math.random()
+  if (rando > errorThreshold) {
+    throw new Error(
+      `Request failed: triggered simulated error (${rando} > ${errorThreshold})`,
+    )
+  }
 
-    // fetch data
-    const response = await fetch(URL, {
-      headers: {
-        authorization: `Bearer ${env.NOTION_TOKEN}`,
-        'notion-version': '2021-05-13',
-        'content-type': 'application/json',
-      },
-      method: 'POST',
-    })
-    if (!response.ok) throw new Error(`Request failed: ${response.statusText}`)
-    const data = await response.json()
-    return {
-      ok: true,
-      data: data.results.map(transform).sort(sorter),
-    }
-  } catch (err) {
-    console.error(err)
-    return { ok: false, error: err.message }
+  // fetch data
+  const response = await fetch(URL, {
+    headers: {
+      authorization: `Bearer ${env.NOTION_TOKEN}`,
+      'notion-version': '2021-05-13',
+      'content-type': 'application/json',
+    },
+    method: 'POST',
+  })
+  if (!response.ok) throw new Error(`Request failed: ${response.statusText}`)
+  const data = await response.json()
+  return {
+    ok: true,
+    data: data.results.map(transform).sort(sorter),
   }
 }
 
