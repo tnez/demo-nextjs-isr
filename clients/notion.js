@@ -11,8 +11,11 @@ export async function fetchAnimals({ errorRate = 0 } = {}) {
   try {
     // simulate an error if desired
     const errorThreshold = 1.0 - errorRate
-    if (Math.random() > errorThreshold) {
-      throw new Error(`Request failed: triggered simulated error`)
+    const rando = Math.random()
+    if (rando > errorThreshold) {
+      throw new Error(
+        `Request failed: triggered simulated error (${rando} > ${errorThreshold})`,
+      )
     }
 
     // fetch data

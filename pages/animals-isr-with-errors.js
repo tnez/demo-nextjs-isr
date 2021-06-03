@@ -16,7 +16,7 @@ export default function AnimalPage({ animals, renderedAt }) {
 
 export async function getStaticProps() {
   const { fetchAnimals } = require('../clients/notion')
-  const result = await fetchAnimals({ errorRate: 0.75 })
+  const result = await fetchAnimals({ errorRate: 0.5 })
   const animals = result.ok ? result.data : []
 
   return {
