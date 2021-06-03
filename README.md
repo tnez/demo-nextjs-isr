@@ -9,5 +9,5 @@ This code goes a long with a demo I am giving of [Incremental Static Regeneratio
 
 ## Deployment
 
-- Vercel Project: _tbd_
-- URL: _tbd_
+- Vercel Project: https://vercel.com/tnez/demo-nextjs-isr
+- URL: https://demo-nextjs-isr.vercel.app/
